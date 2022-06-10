@@ -1,0 +1,115 @@
+.todosContainer {
+  background: transparent;
+  border: none;
+}
+
+.todosHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todosCreated {
+  strong {
+    color: var(--blue-500);
+    line-height: 1.7;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    font-weight: bold;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+.todosFinished {
+  strong {
+    color: var(--purple-300);
+    line-height: 1.7;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    font-weight: bold;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+.todosMainWithoutTodos {
+  margin-top: 1.5rem;
+  text-align: center;
+  list-style: 1.4;
+  color: var(--gray-300);
+
+  strong {
+    display: block;
+    margin-top: 1rem;
+  }
+}
+
+.todosMainWithTodos {
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.todosCheckboxAndText {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  button {
+    background: transparent;
+    border: none;
+    color: var(--blue-500);
+    line-height: 0;
+
+    svg {
+      border-radius: 9999px;
+
+      &:hover {
+        box-shadow: 0 0 0.5em var(--blue-500);
+      }
+    }
+  }
+
+  p {
+    color: var(--gray-100);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+}
+
+.todosFooter {
+  button {
+    background: transparent;
+    border: none;
+
+    svg {
+      transition: all 0.2s;
+      color: var(--gray-300);
+
+      &:hover {
+        color: var(--red-500);
+      }
+    }
+  }
+}

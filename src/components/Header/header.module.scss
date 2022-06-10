@@ -1,0 +1,16 @@
+.todoHeader {
+  text-align: center;
+  padding-block: 4.5rem 5rem;
+  background-color: var(--gray-700);
+
+  &::after {
+    content: "";
+    background-color: var(--gray-600);
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: calc(100% - 7.5%);
+    left: 0;
+    right: 0;
+  }
+}
