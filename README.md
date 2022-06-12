@@ -27,7 +27,7 @@ $ yarn
 $ yarn dev
 ```
 
-Ou pode acessar o site através desse link: [Todo](https://todo-ericdk89.vercel.app/)
+Ou pode acessar o site através desse link: [Todo](https://todo-umber-three.vercel.app/)
 
 ## 💻 Projeto
 
