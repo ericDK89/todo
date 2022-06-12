@@ -38,7 +38,11 @@ export function AddNewTodo({ setTodos }: AddNewTodoProps) {
         value={text}
         required
       />
-      <button type="submit" disabled={verifyIfThereIsText}>
+      <button
+        type="submit"
+        aria-label="Adicionar nova tarefa"
+        disabled={verifyIfThereIsText}
+      >
         Criar <PlusCircle size={16} />
       </button>
     </form>
