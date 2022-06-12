@@ -1,36 +1,34 @@
 import { PlusCircle } from "phosphor-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, Dispatch, FormEvent, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { useNewTodo } from "../../hooks/useNewTodo";
+import { Todo } from "../../App";
 import styles from "./addnewtodo.module.scss";
 
 interface AddNewTodoProps {
-  setTodos: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: string;
-        content: string;
-        done: boolean;
-      }[]
-    >
-  >;
+  setTodos: Dispatch<React.SetStateAction<Todo[]>>;
 }
 
 export function AddNewTodo({ setTodos }: AddNewTodoProps) {
   const [text, setText] = useState("");
-  const { newTodo, setNewTodo } = useNewTodo();
 
   function handleCreateNewTodo(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    setNewTodo({ id: uuidV4(), content: text, done: false });
-    setTodos((previousState) => [...previousState, newTodo]);
-    setText("");
+    if (!text) {
+      return console.log("Can't be empty");
+    } else {
+      setTodos((previousState) => [
+        ...previousState,
+        { id: uuidV4(), content: text, done: false },
+      ]);
+      setText("");
+    }
   }
 
   function newText(e: ChangeEvent<HTMLInputElement>): void {
     setText(e.target.value);
-    console.log(text);
   }
+
+  const verifyIfThereIsText = text.trim().length === 0;
 
   return (
     <form onSubmit={handleCreateNewTodo} className={styles.addNewTodo}>
@@ -38,8 +36,9 @@ export function AddNewTodo({ setTodos }: AddNewTodoProps) {
         placeholder="Adicione uma nova tarefa"
         onChange={newText}
         value={text}
+        required
       />
-      <button type="submit">
+      <button type="submit" disabled={verifyIfThereIsText}>
         Criar <PlusCircle size={16} />
       </button>
     </form>

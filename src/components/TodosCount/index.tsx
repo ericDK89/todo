@@ -1,20 +1,23 @@
 import styles from "./todoscount.module.scss";
 
 interface TodosCountProps {
-  todos?: string[];
+  todosQuantity: number;
+  todosDoneCount: number;
 }
 
-export function TodosCount({ todos }: TodosCountProps) {
+export function TodosCount({ todosQuantity, todosDoneCount }: TodosCountProps) {
   return (
     <header className={styles.todosHeader}>
       <div className={styles.todosCreated}>
         <strong>Tarefas criadas</strong>
-        {/* <span>{todos.length}</span> */}
+        <span>{todosQuantity}</span>
       </div>
 
       <div className={styles.todosFinished}>
         <strong>Concluídas</strong>
-        <span>0</span>
+        <span>
+          {todosDoneCount} de {todosQuantity}
+        </span>
       </div>
     </header>
   );
