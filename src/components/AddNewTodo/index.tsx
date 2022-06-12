@@ -1,44 +1,45 @@
 import { PlusCircle } from "phosphor-react";
-import { ChangeEvent, FormEvent } from "react";
-import { useTodo } from "../../hooks/useTodo";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
+import { useNewTodo } from "../../hooks/useNewTodo";
 import styles from "./addnewtodo.module.scss";
 
 interface AddNewTodoProps {
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  setTodos: React.Dispatch<
+    React.SetStateAction<
+      {
+        id: string;
+        content: string;
+        done: boolean;
+      }[]
+    >
+  >;
 }
 
 export function AddNewTodo({ setTodos }: AddNewTodoProps) {
-  const { setNewTodo, newTodo } = useTodo();
+  const [text, setText] = useState("");
+  const { newTodo, setNewTodo } = useNewTodo();
 
-  function handleCreateNewTodo(e: ChangeEvent<HTMLInputElement>): void {
+  function handleCreateNewTodo(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    e.currentTarget.setCustomValidity("");
-    setNewTodo(e.currentTarget.value);
-  }
-
-  function invalidData(e: ChangeEvent<HTMLInputElement>): void {
-    e.currentTarget.setCustomValidity("Campo obrigatório");
-  }
-
-  function handleAddNewTodo(e: FormEvent) {
-    e.preventDefault();
-    console.log(newTodo);
+    setNewTodo({ id: uuidV4(), content: text, done: false });
     setTodos((previousState) => [...previousState, newTodo]);
-    setNewTodo("");
+    setText("");
   }
 
-  const verifyIfTodoExists = newTodo.trim().length === 0;
+  function newText(e: ChangeEvent<HTMLInputElement>): void {
+    setText(e.target.value);
+    console.log(text);
+  }
 
   return (
-    <form onSubmit={handleAddNewTodo} className={styles.addNewTodo}>
+    <form onSubmit={handleCreateNewTodo} className={styles.addNewTodo}>
       <input
         placeholder="Adicione uma nova tarefa"
-        required
-        value={newTodo}
-        onChange={handleCreateNewTodo}
-        onInvalid={invalidData}
+        onChange={newText}
+        value={text}
       />
-      <button type="submit" disabled={verifyIfTodoExists}>
+      <button type="submit">
         Criar <PlusCircle size={16} />
       </button>
     </form>

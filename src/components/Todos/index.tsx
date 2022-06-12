@@ -1,65 +1,48 @@
-import { Circle, Trash } from "phosphor-react";
-import { MouseEventHandler } from "react";
-import clipboardImg from "../../assets/images/clipboard.png";
+import { CheckCircle, Trash } from "phosphor-react";
 import styles from "./todos.module.scss";
 
 interface TodosProps {
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-  todos: string[];
+  content: string;
+  deletedTodo: (deletedTodo: {
+    id: string;
+    content: string;
+    done: boolean;
+  }) => void;
+  todo: {
+    id: string;
+    content: string;
+    done: boolean;
+  }[];
 }
 
-export function Todos({ todos, setTodos }: TodosProps) {
-  const verifyIfExistsATodo = todos.length === 0;
-
-  function handleDeleteTodo(deletedTodo: MouseEventHandler<HTMLButtonElement>): void {
-    const todosWithoutDeleteTodo = todos.filter((todo) => todo !== deletedTodo);
-    setTodos(todosWithoutDeleteTodo);
+export function Todos({ content, deletedTodo, todo }: TodosProps) {
+  function handleDeleteTodo() {
+    deletedTodo(todo);
   }
 
   return (
     <div className={styles.todosContainer}>
-      <header className={styles.todosHeader}>
-        <div className={styles.todosCreated}>
-          <strong>Tarefas criadas</strong>
-          <span>0</span>
+      <main className={styles.todosMainWithTodos}>
+        <div className={styles.todosCheckboxAndText}>
+          <button type="button" title="Marcar tarefa como feita">
+            <CheckCircle size={24} weight="fill" color="#5e60ce" />
+
+            {/* <Circle size={24} color="#4ea8de" /> */}
+          </button>
+
+          <p className={styles.setTodoAsDone}>{content}</p>
         </div>
 
-        <div className={styles.todosFinished}>
-          <strong>Concluídas</strong>
-          <span>0</span>
-        </div>
-      </header>
-
-      {verifyIfExistsATodo ? (
-        <main className={styles.todosMainWithoutTodos}>
-          <img src={clipboardImg} alt="Sem tarefas" />
-          <strong>Você ainda não tem tarefas cadastradas</strong>
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </main>
-      ) : (
-        todos.map((item, index) => {
-          return (
-            <main className={styles.todosMainWithTodos}>
-              <div className={styles.todosCheckboxAndText}>
-                <button type="button" title="Marcar tarefa como feita">
-                  <Circle size={24} />
-                </button>
-                <p key={index}>{item}</p>
-              </div>
-
-              <footer className={styles.todosFooter}>
-                <button
-                  type="button"
-                  title="Deletar tarefa"
-                  onClick={handleDeleteTodo}
-                >
-                  <Trash size={20} />
-                </button>
-              </footer>
-            </main>
-          );
-        })
-      )}
+        <footer className={styles.todosFooter}>
+          <button
+            type="button"
+            title="Deletar tarefa"
+            onClick={handleDeleteTodo}
+          >
+            <Trash size={20} />
+          </button>
+        </footer>
+      </main>
     </div>
   );
 }

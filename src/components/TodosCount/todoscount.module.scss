@@ -1,0 +1,43 @@
+.todosHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todosCreated {
+  strong {
+    color: var(--blue-500);
+    line-height: 1.7;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    font-weight: bold;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+.todosFinished {
+  strong {
+    color: var(--purple-300);
+    line-height: 1.7;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    font-weight: bold;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}

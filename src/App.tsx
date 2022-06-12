@@ -2,22 +2,47 @@ import { useState } from "react";
 import { AddNewTodo } from "./components/AddNewTodo";
 import { Header } from "./components/Header";
 import { Todos } from "./components/Todos";
-import { TodoContextProvider } from "./context/TodoContext";
+import { TodosCount } from "./components/TodosCount";
+import { NewTodoContextProvider } from "./context/NewTodoContext";
 import styles from "./styles/wrapper.module.scss";
 
 function App() {
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<
+    { id: string; content: string; done: boolean }[]
+  >([]);
+
+  function deletedTodo(deletedTodo: {
+    id: string;
+    content: string;
+    done: boolean;
+  }) {
+    const todoListWithoutDeletedOne = todos.filter(
+      (todo) => todo !== deletedTodo
+    );
+    setTodos(todoListWithoutDeletedOne);
+  }
 
   return (
     <div className="App">
       <Header />
 
-      <TodoContextProvider>
+      <NewTodoContextProvider>
         <main className={styles.wrapper}>
           <AddNewTodo setTodos={setTodos} />
-          <Todos todos={todos} setTodos={setTodos} />
+          <TodosCount />
+          {/* <WithoutTodos /> */}
+          {todos.map((todo) => {
+            return (
+              <Todos
+                key={todo.id}
+                todo={todo}
+                content={todo.content}
+                deletedTodo={deletedTodo}
+              />
+            );
+          })}
         </main>
-      </TodoContextProvider>
+      </NewTodoContextProvider>
     </div>
   );
 }

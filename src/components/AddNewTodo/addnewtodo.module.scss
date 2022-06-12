@@ -3,6 +3,7 @@
   justify-content: center;
   gap: 0.5rem;
   margin-top: calc(0px - 27px);
+  margin-bottom: 4rem;
 
   input {
     border-radius: 8px;
@@ -34,7 +35,7 @@
 
     &:disabled {
       filter: brightness(0.7);
-      // cursor: not-allowed;
+      cursor: not-allowed;
     }
   }
 }
