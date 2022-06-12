@@ -1,17 +1,22 @@
 import { CheckCircle, Circle, Trash } from "phosphor-react";
-import { useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { Todo } from "../../App";
 import styles from "./todos.module.scss";
 
 interface TodosProps {
-  content: string;
   deletedTodo: (deletedTodo: Todo) => void;
   todo: Todo;
+  todos: Todo[];
+  setTodosDoneCount: Dispatch<React.SetStateAction<number>>;
 }
 
-export function Todos({ content, deletedTodo, todo }: TodosProps) {
+export function Todos({
+  deletedTodo,
+  todo,
+  todos,
+  setTodosDoneCount,
+}: TodosProps) {
   const [isTodoDone, setIsTodoDone] = useState(false);
-  const [todosDoneQuantity, setTodoDoneQuantity] = useState(0);
 
   function handleDeleteTodo() {
     deletedTodo(todo);
@@ -20,6 +25,11 @@ export function Todos({ content, deletedTodo, todo }: TodosProps) {
   function handleMarkTodoAsDone() {
     setIsTodoDone((todo.done = !todo.done));
   }
+
+  useEffect(() => {
+    const total = todos.filter((todo) => todo.done === true).length;
+    setTodosDoneCount(total);
+  }, [isTodoDone, handleDeleteTodo]);
 
   return (
     <div className={styles.todosContainer}>
@@ -42,7 +52,7 @@ export function Todos({ content, deletedTodo, todo }: TodosProps) {
               isTodoDone ? styles.setTodoAsDone : styles.setTodoAsNotDone
             }
           >
-            {content}
+            {todo.content}
           </p>
         </div>
 

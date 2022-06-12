@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddNewTodo } from "./components/AddNewTodo";
 import { Header } from "./components/Header";
 import { Todos } from "./components/Todos";
@@ -14,7 +14,6 @@ export interface Todo {
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
-
   const [todosDoneCount, setTodosDoneCount] = useState(0);
 
   function deletedTodo(deletedTodo: Todo) {
@@ -23,17 +22,6 @@ function App() {
     );
     setTodos(todoListWithoutDeletedOne);
   }
-
-  useEffect(() => {
-    const nada1 = todos.reduce((acc, todo): number => {
-      if (todo.done === false) {
-        acc + 1;
-      }
-      setTodosDoneCount(todosDoneCount + acc)
-      return acc;
-    }, 0);
-    console.log(nada1);
-  }, [todosDoneCount]);
 
   const todosQuantity = 0 + todos.length;
 
@@ -58,8 +46,9 @@ function App() {
               <Todos
                 key={todo.id}
                 todo={todo}
-                content={todo.content}
                 deletedTodo={deletedTodo}
+                todos={todos}
+                setTodosDoneCount={setTodosDoneCount}
               />
             );
           })
