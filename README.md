@@ -31,7 +31,7 @@ Ou pode acessar o site através desse link: [https://todo-umber-three.vercel.app
 
 ## 💻 Projeto
 
-Todo é um projeto para de uma to-do-list, que além de funções padrões como criar, deletar e marcar uma tarefa como concluída, também permite visualizar 
+Todo é um projeto de uma to-do-list, que além de funções padrões como criar, deletar e marcar uma tarefa como concluída, também permite visualizar 
 uma contagem de quantas tarefas foram criadas, e quantas tarefas já foram concluídas. 
 
 Feito por Eric Macedo 🌌  [LinkedIn](https://www.linkedin.com/in/eric-macedo-dev/)
